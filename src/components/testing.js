@@ -1,35 +1,4 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-import Sidebar from "./sidebar"
-import "../styles/layout-overide.css";
-import Media from 'react-media'
-import { Helmet } from "react-helmet"
-
-
-
-
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
-  return (
+const TemplateWrapper = ({children}) => (
     <div>
         <Helmet
             title="Gatsby Default Starter"
@@ -70,8 +39,7 @@ const Layout = ({ children }) => {
                             <div
                                 style={{
                                 flex: 1
-                            }}>{children}</div>
-                            
+                            }}>{children()}</div>
                         </div>
                     )
                     : (
@@ -90,8 +58,8 @@ const Layout = ({ children }) => {
                                 flex: 2.5,
                                 paddingRight: "30px"
                             }}>
-                                {children}
-                            </div>
+                                {children()}
+                            </div>)
 
                             <div
                                 style={{
@@ -109,11 +77,3 @@ const Layout = ({ children }) => {
             </Media>
         </div>
     </div>)
-
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout
